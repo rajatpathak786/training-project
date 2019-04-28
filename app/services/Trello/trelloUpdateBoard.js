@@ -22,7 +22,7 @@ export default class trelloUpdateBoard extends ServiceBase {
           attributes: ['id'],
           where: {empName: req.query.name}
         })
-        .then((trello) => {
+        .then(async (trello) => {
           createBoard('Employee Training');
           let createBoard = (assignmentName) => {
           let options = { method: 'POST',
@@ -44,7 +44,7 @@ export default class trelloUpdateBoard extends ServiceBase {
              token: token
             } 
           };
-        request(options, function (error, response, body) {
+          request(options, function (error, response, body) {
           if (error) throw new Error(error);
           console.log(body);
           emptrainingtable.update (

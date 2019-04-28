@@ -17,11 +17,13 @@ export default class trelloUpdateBoard extends ServiceBase {
 
   async run() {
     try {
+        console.log('5555646464646464');
         emptable.findAll({
           attributes: ['id'],
           where: {empName: req.query.name}
         })
         .then((trello) => {
+          createBoard('Employee Training');
           let createBoard = (assignmentName) => {
           let options = { method: 'POST',
           url: 'https://api.trello.com/1/boards',
@@ -51,7 +53,6 @@ export default class trelloUpdateBoard extends ServiceBase {
           )
         });
       }
-      createBoard('Employee Training');
         })
       return this._args
     } catch (error) {

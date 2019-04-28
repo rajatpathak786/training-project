@@ -18,13 +18,15 @@ export default class trelloUpdateBoard extends ServiceBase {
   async run() {
     try {
         console.log('5555646464646464');
+        console.log(this._args)
         emptable.findAll({
           attributes: ['id'],
-          where: {empName: req.query.name}
+          where: {empName: this._args}
         })
-        .then(async (trello) => {
-          createBoard('Employee Training');
-          let createBoard = (assignmentName) => {
+        .then((trello) => {
+          console.log(trello[0].id)
+          console.log('555555555555');
+          let assignmentName = 'Employee Training Board'
           let options = { method: 'POST',
           url: 'https://api.trello.com/1/boards',
           qs: 
@@ -46,16 +48,20 @@ export default class trelloUpdateBoard extends ServiceBase {
           };
           request(options, function (error, response, body) {
           if (error) throw new Error(error);
-          console.log(body);
-          emptrainingtable.update (
-          {boardId: body.id},
-          {where: {empId: trello[0].id}}//empId: trello[0].id moduleId:trello[0].moduleId// empId: trello[0].id moduleId:trello[0].moduleId 
+          console.dir(body);
+          console.log(body[0].id);
+          console.log(body.limits);
+          emptrainingtable.update(
+            {boardId: "555555555"},
+            {where: {empId: trello[0].id}}
           )
-        });
-      }
+          .catch((error) => {
+            console.log(error[0])
+          })
         })
       return this._args
-    } catch (error) {
+    })
+   } catch (error) {
       return this.variable
     }
   }

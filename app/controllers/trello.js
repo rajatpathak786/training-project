@@ -6,7 +6,7 @@ import trelloUpdateList from '../services/Trello/trelloUpdateList'
 export default class trello {
 
   static async trelloUpdateBoard(req, res) {
-    const variable = req.body;
+    const variable = req.body.name;
     const trelloUpdateBoardResult = await trelloUpdateBoard.execute(variable)
     if (trelloUpdateBoardResult.successful) {
       Responder.success(res, { variable })

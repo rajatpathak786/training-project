@@ -7,19 +7,19 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "async": "^2.5.0",
+    "async": "^2.6.2",
     "bcrypt": "^2.0.1",
-    "bluebird": "^3.5.1",
-    "compression": "^1.7.1",
-    "convict": "^4.0.1",
-    "diskusage": "^0.2.4",
-    "express": "^4.16.2",
+    "bluebird": "^3.5.4",
+    "compression": "^1.7.4",
+    "convict": "^4.4.1",
+    "diskusage": "^0.2.6",
+    "express": "^4.16.4",
     "express-list-routes": "^0.1.4",
-    "helmet": "^3.9.0",
+    "helmet": "^3.16.0",
     "lodash": "^4.17.11",
     "method-override": "^2.3.10",
     "morgan": "^1.9.1",
-    "multer": "^1.3.0",
+    "multer": "^1.4.1",
     "nodemailer": "^6.1.1",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
@@ -32,7 +32,7 @@
     "stream-to-buffer": "^0.1.0",
     "validate.js": "^0.12.0",
     "web3": "^1.0.0-beta.52",
-    "winston": "^2.4.0"
+    "winston": "^2.4.4"
   },
   "scripts": {
     "start": "nodemon --inspect=0.0.0.0:5858 ./bin/dev",
@@ -42,7 +42,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.18.11",
     "standard": "^10.0.3"
   }
 }

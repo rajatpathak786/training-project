@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     drift: DataTypes.INTEGER,
     subject: DataTypes.STRING,
     body: DataTypes.STRING,
-    boardId: DataTypes.String,
-    listId: DataTypes.String,
-    cardId: DataTypes.String,
+    boardId: DataTypes.STRING,
+    listId: DataTypes.STRING,
+    cardId: DataTypes.STRING,
     leave: DataTypes.INTEGER,
     expectedDateOfCompletion: DataTypes.DATE
   }, {});

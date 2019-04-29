@@ -21,17 +21,17 @@ export default class trelloUpdateList extends ServiceBase {
     try {
       moduletable.findAll({
         attributes: ['id'],
-        where: { moduleName: req.body.modulename }
+        where: { moduleName: this._args.mname }
       })
         .then((modulee) => {
           emptable.findAll({
             attributes: ['id'],
-            where: { empName: req.body.empname }
+            where: { empName: this._args.empname }
           })
             .then((emp) => {
               tasktable.findAll({
                 attributes: ['id'],
-                where: { taskName: req.body.taskname }
+                where: { taskName: this._args.taskname }
               })
                 .then((task) => {
                   emptrainingtable.findAll({
@@ -48,13 +48,13 @@ export default class trelloUpdateList extends ServiceBase {
                         url: `https://api.trello.com/1/boards/${trellolist[0].boardId}/lists`,
                         qs:
                         {
-                          name: req.body.modulename,
+                          name: this._args.mname,
                           pos: 'top',
                           key: apiKey,
                           token: token
                         }
                       };
-                      var rq = request(options, function (error, response, body) {
+                      request(options, function (error, response, body) {
                         if (error) throw new Error(error);
                         //listID=body.id database code here
                         emptrainingtable.update(

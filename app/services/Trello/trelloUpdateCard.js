@@ -20,21 +20,21 @@ export default class trelloUpdateCard extends ServiceBase {
       moduletable.findAll({
         attributes: ['id'],
         where: {
-          moduleName: req.body.modulename
+          moduleName: this._args.modulename
         }
       })
         .then((modulee) => {
           emptable.findAll({
             attributes: ['id'],
             where: {
-              empName: req.body.empname
+              empName: this._args.empname
             }
           })
             .then((emp) => {
               tasktable.findAll({
                 attributes: ['taskName'],
                 where: {
-                  id: req.body.taskId
+                  id: this._args.taskid
                 }
               })
                 .then((card) => {

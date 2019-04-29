@@ -5,8 +5,7 @@ import ServiceBase from '../base'
 export default class employeeFetch extends ServiceBase {
   
   async run () {
-    try {
-
+    try {      
       return this._args
 
     } catch (error) {
@@ -15,5 +14,6 @@ export default class employeeFetch extends ServiceBase {
       
       return this.variable
     }
+    
   }
 }

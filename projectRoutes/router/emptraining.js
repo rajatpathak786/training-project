@@ -4,7 +4,6 @@ import empTraining from '../../app/controllers/empTraining'
 
 router.get('/training', empTraining.empTrainingGet);
 router.post('/training', empTraining.empTrainingInsert);
-router.get('/trelloBoard', empTraining.trelloUpdateBoard);
 router.get('/updateDrift', empTraining.updateDriftParams);
 router.post('/updateDrift', empTraining.updateDrift);
 

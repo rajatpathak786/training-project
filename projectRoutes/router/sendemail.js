@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-//const sendemail = require('../../controller/sendEmail');
+import sendemail from '../../app/controllers/sendEmail'
 
-/*router.get('/email', sendemail.sendEmailParams);
-router.post('/email', sendemail.sendMail);
-*/
+router.get('/email', sendemail.sendEmailParams);
+router.post('/email', sendemail.sendEmail);
+
+
 module.exports = router;

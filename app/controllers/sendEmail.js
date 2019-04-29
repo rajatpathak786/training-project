@@ -1,5 +1,5 @@
 import Responder from '../../server/expressResponder'
-import sendEmail from '../services/Email/sendEmail'
+import sendEmail from '../services/Email/test'
 import sendEmailParams from '../services/Email/sendEmailParams'
 
 export default class sendMail {

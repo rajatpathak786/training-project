@@ -1,54 +1,26 @@
 {
-<<<<<<< HEAD
-"development": {
+  "development": {
   "username": "postgres",
   "password": "123",
   "database": "mydatabase",
   "host": "127.0.0.1",
   "port": "5432",	
   "dialect": "postgres"
-},
-"test": {
+  },
+  "test": {
   "username": "postgres",
   "password": "123",
   "database": "mydatabase",
   "host": "127.0.0.1",
   "port": "5432",
   "dialect": "postgres"
-},
-"production": {
+  },
+  "production": {
   "username": "postgres",
   "password": "123",
   "database": "mydatabase",
   "host": "127.0.0.1",
   "port": "5432",
   "dialect": "postgres"
+  }
 }
-}
-=======
-    "development": {
-      "username": "postgres",
-      "password": "123",
-      "database": "mydatabase",
-      "host": "127.0.0.1",
-      "port": "5432",	
-      "dialect": "postgres"
-    },
-    "test": {
-      "username": "postgres",
-      "password": "123",
-      "database": "mydatabase",
-      "host": "127.0.0.1",
-      "port": "5432",
-      "dialect": "postgres"
-    },
-    "production": {
-      "username": "postgres",
-      "password": "123",
-      "database": "mydatabase",
-      "host": "127.0.0.1",
-      "port": "5432",
-      "dialect": "postgres"
-    }
-    }
->>>>>>> feature/api_controllers

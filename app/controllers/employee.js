@@ -22,9 +22,7 @@ export default class employee {
   static async employeeDelete(req, res) {
     const variable = req.query;
     const employeeDeleteResult = await employeeDelete.execute(variable,res)
-    console.dir(employeeDeleteResult);
     if (employeeDeleteResult.successful) {
-      console.dir({ variable });
       Responder.success(res, { variable })
     } else {
       Responder.operationFailed(res, employeeDeleteResult.error)
@@ -67,3 +65,5 @@ export default class employee {
     }
   }
 }
+
+

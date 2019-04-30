@@ -20,7 +20,7 @@ export default class empTrainingInsert extends ServiceBase {
         where: {moduleName: this._args.modulename}
     })
     .then((objmodule) => {
-      moduletable.findAll( {
+      moduletable.findAll({
         attributes: ['taskId'],
         where: {moduleName: this._args.modulename}
     })

@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const empTraingTable = sequelize.define('empTraingTable', {
     empId: DataTypes.INTEGER,
     reviewerId: DataTypes.INTEGER,
-    dateOfStart: DataTypes.DATE,
+    dateOfStart: DataTypes.DATEONLY,
     dateOfCompletion: DataTypes.DATE,
     moduleId: DataTypes.INTEGER,
     taskId: DataTypes.INTEGER,
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     listId: DataTypes.STRING,
     cardId: DataTypes.STRING,
     leave: DataTypes.INTEGER,
-    expectedDateOfCompletion: DataTypes.DATE
+    expectedDateOfCompletion: DataTypes.DATEONLY
   }, {});
   empTraingTable.associate = function(models) {
     // associations can be defined here

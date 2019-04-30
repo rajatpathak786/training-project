@@ -1,11 +1,11 @@
 import Responder from '../../server/expressResponder'
-import sendEmail from '../services/Email/test'
+import sendEmail from '../services/Email/sendEmail'
 import sendEmailParams from '../services/Email/sendEmailParams'
 
 export default class sendMail {
 
   static async sendEmail(req, res) {
-    const variable = req.body;
+    const variable = 'mail';
     const sendEmailResult = await sendEmail.execute(variable)
     if (sendEmailResult.successful) {
       Responder.success(res, { variable })

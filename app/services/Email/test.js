@@ -1,4 +1,4 @@
-import ServiceBase from '../base'
+/*import ServiceBase from '../base'
 const emptable = require('../../../models').empTable;
 const moduletable = require('../../../models').moduleTable;
 const tasktable = require('../../../models').taskTable;
@@ -154,4 +154,4 @@ export default class sendEmail extends ServiceBase {
 
   } 
 }
-
+*/

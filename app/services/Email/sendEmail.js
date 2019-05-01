@@ -63,7 +63,7 @@ export default class sendEmail extends ServiceBase {
               where: {id: trainingInfo[0].empId}
             })
             .then(async(employeeDetails) => {
-              console.log('101010101010101010101010       '+employeeDetails[0]);
+              console.log('10 10 10 10 10 10 10 10 10 10 10 10       '+employeeDetails[0]);
               await emptable.findAll({
                 attributes: ['empEmail'],
                 where: {id: trainingInfo[0].reviewerId}

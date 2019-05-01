@@ -1,7 +1,5 @@
 const emptrainingtable = require('../../../models').empTraingTable;
-const emptable = require('../../../models').empTable;
 const moduletable = require('../../../models').moduleTable;
-const tasktable = require('../../../models').taskTable
 const request = require("request");
 const {apiKey, token} = require('./config');
 import ServiceBase from '../base'
@@ -19,65 +17,66 @@ export default class trelloUpdateList extends ServiceBase {
 
   async run() {
     try {
-      moduletable.findAll({
-        attributes: ['id'],
-        where: { moduleName: this._args.mname }
+      let date = Date.now();
+      let formatDate = (date) => {
+        let currentDate = new Date(date),
+        month = '' + (currentDate.getMonth() + 1),
+        day = '' + currentDate.getDate(),
+        year = currentDate.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
+      }
+      date = formatDate(date);
+    
+      emptrainingtable.findAll({
+        attributes: ['id', 'moduleId', 'listId', 'boardId'],
+        where: {dateOfStart: date}
       })
-        .then((modulee) => {
-          emptable.findAll({
-            attributes: ['id'],
-            where: { empName: this._args.empname }
-          })
-            .then((emp) => {
-              tasktable.findAll({
-                attributes: ['id'],
-                where: { taskName: this._args.taskname }
-              })
-                .then((task) => {
-                  emptrainingtable.findAll({
-                    attributes: ['boardId'],
-                    where: {
-                      empId: emp[0].id,
-                      taskId: task[0].id,
-                      moduleId: modulee[0].id
-                    }
-                  })
-                    .then((trellolist) => {
-                      var options = {
-                        method: 'POST',
-                        url: `https://api.trello.com/1/boards/${trellolist[0].boardId}/lists`,
-                        qs:
-                        {
-                          name: this._args.mname,
-                          pos: 'top',
-                          key: apiKey,
-                          token: token
-                        }
-                      };
-                      request(options, function (error, response, body) {
-                        if (error) throw new Error(error);
-                        //listID=body.id database code here
-                        emptrainingtable.update(
-                          { listId: body.id },
-                          {
-                            where: {
-                              taskId: task[0].id,
-                              moduleId: modulee[0].id,
-                              empId: emp[0].id
-                            }
-                          }
-                        )
-                      })
-                    })
-                })
+      .then(async(trainingInfo) => {
+        let length = trainingInfo.length
+        for(let i = 0; i < length; ) {
+          if (typeof trainingInfo[i].listId == 'object') {
+            await moduletable.findAll({
+              attributes: ['moduleName'],
+              where: {id: trainingInfo[i].moduleId}    
             })
-        })
-      return this.variable
-
+            .then(async (modulename) => {
+              let options = {
+                method: 'POST',
+                url: `https://api.trello.com/1/boards/${trainingInfo[i].boardId}/lists`,
+                qs:
+                {
+                  name: modulename[i].moduleName,
+                  pos: 'top',
+                  key: apiKey,
+                  token: token
+                }
+              };
+              await request(options, async function (error, response, body) {
+                if (error) throw new Error(error);
+                body = body.split(',');
+                body = body[0];
+                body = body.split(':');
+                body = body[1];
+                await emptrainingtable.update(
+                  { listId: body.id },
+                  {where: {id: trainingInfo[i].id}}
+                )    
+              })    
+            })
+          } else {
+            await emptrainingtable.update(
+              { listId: trainingInfo[i].listId},
+              {where: {id: trainingInfo[i].id}}
+            )
+          }
+          ++i;        
+        } 
+      })      
+      return this._args
     } catch (error) {
-
       // handle error case
-
       return this.variable
     }
   }

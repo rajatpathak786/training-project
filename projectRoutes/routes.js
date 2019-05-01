@@ -6,7 +6,6 @@ const modulee = require('./router/module');
 const task = require('./router/task');
 const empTraining = require('./router/emptraining');
 const sendemail = require('./router/sendemail');
-const trello = require('./router/trello')
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.text());
 router.use(bodyParser.json());
@@ -15,6 +14,5 @@ router.use(employee);
 router.use(modulee);
 router.use(task);
 router.use(empTraining);
-router.use(trello);
 
 module.exports = router;

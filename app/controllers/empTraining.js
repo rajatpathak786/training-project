@@ -13,6 +13,8 @@ export default class empTraining {
     variable.endDate = new Date();
     variable.endDate = new Date(variable.endDate.setDate(variable.date.getDate() + 5));
     const empTrainingInsertResult = await empTrainingInsert.execute(variable)
+    console.log(empTrainingInsertResult)
+    console.log(empTrainingInsertResult.successful)
     if (empTrainingInsertResult.successful) {
       const trelloUpdateBoardResult = await trelloUpdateBoard.execute(variable)
       if (trelloUpdateBoardResult.successful) {

@@ -4,16 +4,9 @@ import Log from './logger'
 
 export default class ServiceBase {
   constructor() {
-    console.count("constructor");
-    console.log("*************************************************");
-    console.log('constructor11111111111111111111111111111111111111111111');
     this._args = arguments[0];
-    console.log('constructor22222222222222222222222222222222222');
-    console.dir(this._args);
-    console.log(this._args);
     this._context = arguments[1]
     this._errors = {}
-    console.log(this._errors);
     this._successful = null
     this._failed = null
     this._result = null
@@ -55,10 +48,6 @@ export default class ServiceBase {
   }
 
   async tryExecuting() {
-    console.log('tryExecuting');
-    console.log(_.size)
-    console.dir(this.errors)
-    console.dir(_.size(this.errors))
     // if (_.size(this.errors)) {
     //   console.log(this.errors)
     //   this._failed = true
@@ -94,9 +83,6 @@ export default class ServiceBase {
   }
 
   filterArgs() {
-    console.log("22222222222222222222222222222");
-    console.dir(this._args)
-    console.dir(this.constraints)
     return validate.cleanAttributes(this._args)
   }
 
@@ -108,7 +94,6 @@ export default class ServiceBase {
     const validationErrors = validate(this._args)
     const errors = {}
     _.forEach(validationErrors, (error, key) => {
-      console.log("---------------"+key+":"+error[0])
       errors[key] = error[0]
     })
     if (_.size(errors)) {
@@ -132,12 +117,7 @@ export default class ServiceBase {
   static async execute() {
     Log.info(`Service Started: ${this.name}`, { context: this.args, userCtx: this.context, wrap: 'start' })
     const args = arguments//variable
-    console.log(args);
-    console.log(typeof args);
-    console.dir(args)
     const instance = new this(...args)
-    console.log('66666666666666666666666666');
-    console.dir(instance);
     
     await instance.tryExecuting()
     Log.info(`Service Finished: ${this.name}`, { context: this.args, userCtx: this.context, wrap: 'end' })

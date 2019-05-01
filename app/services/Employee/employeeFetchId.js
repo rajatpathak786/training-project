@@ -13,17 +13,18 @@ export default class employeeFetchId extends ServiceBase {
 
   async run () {
     try {
-      let returnval = retId();
-      function retId() {
-        emptable.findAll({
+      let returnval = await retId();
+      async function retId() {
+        await emptable.findAll({
           attributes: ['id'],
           where: {empName: req.query.name}
         })
-        .then((emp) => {
+        .then(async(emp) => {
           returnval = emp[0].id;
           return returnval
         })
       }
+      return returnval
     }
 
      catch (error) {

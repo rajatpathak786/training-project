@@ -1,4 +1,6 @@
 import ServiceBase from '../base'
+import trelloList from '../Trello/trelloUpdateList'
+import trelloCard from '../Trello/trelloUpdateCard';
 const emptable = require('../../../models').empTable;
 const moduletable = require('../../../models').moduleTable;
 const tasktable = require('../../../models').taskTable;
@@ -102,7 +104,7 @@ export default class sendEmail extends ServiceBase {
       let nextmail = schedule.scheduleJob('* * * * *', async function() {
         let date = Date.now();
         console.log('111111111111     '+date);
-        let formatDate = (date) => {
+        let formatDate = async (date) => {
           let currentDate = new Date(date),
           month = '' + (currentDate.getMonth() + 1),
           day = '' + currentDate.getDate(),
@@ -111,7 +113,7 @@ export default class sendEmail extends ServiceBase {
           if (day.length < 2) day = '0' + day;
           return [year, month, day].join('-');
         }
-        date = formatDate(date);
+        date = await formatDate(date);
         console.log('222222222222     '+date);
         console.log('333333333333333');
 
@@ -123,18 +125,22 @@ export default class sendEmail extends ServiceBase {
         .then(async (empids) => {
           console.dir(empids[0]);
           console.log(typeof empids[0]);
-          console.log('5555555555555555555            '+empids[0].id+'      '+empids[1].id);
+          console.log('5555555555555555555            '+empids[0].id+'      ');
           if(typeof empids[0] == 'undefined') {
             console.log('No new assignments today');
           } else {
             let length = empids.length;
-            console.log(empids[0].id+empids[1].id);
+            console.log(empids[0].id);
             console.log(typeof empids[0].id);
             console.log('6666666666666666666            '+length);
             console.log('7777777777777777777777');
             for (let i = 0 ; i < length; ) {
               await assignmentMail(empids[i].id)
               console.log('after mail send');
+              await trelloList.run();
+              console.log('Trello List Updated');
+              await trelloCard.run();  
+              console.log('Trello Card Updated');
               ++i;
             }
           }              

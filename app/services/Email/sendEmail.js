@@ -101,7 +101,7 @@ export default class sendEmail extends ServiceBase {
         })        
       }
       
-      let nextmail = schedule.scheduleJob('* * * * *', async function() {
+      let nextmail = schedule.scheduleJob('* /11 * * *', async function() {
         let date = Date.now();
         console.log('111111111111     '+date);
         let formatDate = async (date) => {

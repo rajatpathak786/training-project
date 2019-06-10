@@ -1,23 +1,23 @@
 import ServiceBase from '../base'
 const tasktable = require('../../../models').taskTable;
-const constraints = {
-  variable: {
-    presence: { allowEmpty: false }
-  }
-}
 
 export default class taskFetchId extends ServiceBase {
-  get constraints() {
-    return constraints
-  }
 
   async run() {
     try {
-      tasktable.findAll({
-        attributes: ['id'],
-        where: { taskName: this._args.name }
-      })
-      return this._args
+      let taskName = []
+      let retId = async() => {
+        return await tasktable.findAll({
+          attributes: ['taskName'],
+          where: { id: this._args.id }
+        })
+        .then((task) => {
+          taskName.push({'id': this._args.id, 'taskName': task[0].taskName})
+          return taskName
+        })
+      }
+      let returnval = await retId();
+      return returnval
 
     } catch (error) {
       return this.variable

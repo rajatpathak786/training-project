@@ -1,4 +1,5 @@
 import ServiceBase from '../base'
+const tasktable = require('../../../models').taskTable;
 
 const constraints = {
   variable: {
@@ -12,9 +13,11 @@ export default class taskUpdate extends ServiceBase {
   }
 
   async run() {
+    console.log('2222222222')
+    console.log(this._args)
     try {
       tasktable.update(
-        {taskName: this._args.name},
+        {taskName: this._args.taskName},
         {where: {id: this._args.id}}
       )
       return this._args

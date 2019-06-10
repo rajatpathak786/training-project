@@ -5,8 +5,20 @@ import taskFetchId from '../services/Task/taskFetchId'
 import taskUpdate from '../services/Task/taskUpdate'
 import taskGet from '../services/Task/taskGet'
 import taskFetch from '../services/Task/taskFetch'
+import taskDetails from '../services/Task/taskDetails'
 
 export default class task {
+
+  static async taskDetails(req, res) {
+    const variable = req.body;
+    const taskDetailsResult = await taskDetails.execute(variable)
+    let resultResponse = taskDetailsResult._result;
+    if (taskDetailsResult.successful) {
+      Responder.success(res, { resultResponse })
+    } else {
+      Responder.operationFailed(res, taskDetailsResult.error)
+    }
+  }
 
   static async taskInsert(req, res) {
     const variable = req.body;
@@ -29,8 +41,9 @@ export default class task {
   static async taskFetchId(req, res) {
     const variable = req.query;
     const taskFetchIdResult = await taskFetchId.execute(variable)
+    let resultResponse = taskFetchIdResult._result
     if (taskFetchIdResult.successful) {
-      Responder.success(res, { variable })
+      Responder.success(res, { resultResponse })
     } else {
       Responder.operationFailed(res, taskFetchIdResult.error)
     }

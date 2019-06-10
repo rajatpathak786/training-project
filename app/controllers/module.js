@@ -5,16 +5,29 @@ import moduleInsert from '../services/Module/moduleInsert'
 import moduleUpdate from '../services/Module/moduleUpdate'
 import moduleFetch from '../services/Module/moduleFetch'
 import moduleGet from '../services/Module/moduleGet'
+import moduleDetails from '../services/Module/moduleDetails'
 
 export default class module {
 
   static async moduleFetchId(req, res) {
+    console.log(req.query)
     const variable = req.query;
     const moduleFetchIdResult = await moduleFetchId.execute(variable)
+    let resultResponse = moduleFetchIdResult._result;
     if (moduleFetchIdResult.successful) {
-      Responder.success(res, { variable })
+      Responder.success(res, { resultResponse })
     } else {
       Responder.operationFailed(res, moduleFetchIdResult.error)
+    }
+  }
+  static async moduleDetails(req, res) {
+    const variable = req.body;
+    const moduleDetailsResult = await moduleDetails.execute(variable)
+    let resultResponse = moduleDetailsResult._result;
+    if (moduleDetailsResult.successful) {
+      Responder.success(res, { resultResponse })
+    } else {
+      Responder.operationFailed(res, moduleDetailsResult.error)
     }
   }
   static async moduleInsert(req, res) {
@@ -36,7 +49,7 @@ export default class module {
     }
   }
   static async moduleDelete(req, res) {
-    const variable = req.body;
+    const variable = req.query;
     const moduleDeleteResult = await moduleDelete.execute(variable)
     if (moduleDeleteResult.successful) {
       Responder.success(res, { variable })

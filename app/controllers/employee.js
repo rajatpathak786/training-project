@@ -6,6 +6,7 @@ import employeeUpdate from '../services/Employee/employeeUpdate'
 import employeeFetchId from '../services/Employee/employeeFetchId'
 import employeeFetch from '../services/Employee/employeeFetch'
 import employeeGet from '../services/Employee/employeeGet'
+import employeeDetails from '../services/Employee/employeeDetails'
 
 export default class employee {
 
@@ -18,9 +19,21 @@ export default class employee {
       Responder.operationFailed(res, employeeInsertResult.error)
     }
   }
+
+  static async employeeDetails(req, res) {
+    const variable = req.body;
+    const employeeDetailsResult = await employeeDetails.execute(variable)
+    let resultResponse = employeeDetailsResult._result;
+    if (employeeDetailsResult.successful) {
+      Responder.success(res, { resultResponse })
+    } else {
+      Responder.operationFailed(res, employeeDetailsResult.error)
+    }
+  }
   
   static async employeeDelete(req, res) {
     const variable = req.query;
+    console.log(variable)
     const employeeDeleteResult = await employeeDelete.execute(variable,res)
     if (employeeDeleteResult.successful) {
       Responder.success(res, { variable })
@@ -29,10 +42,13 @@ export default class employee {
     }
   }
   static async employeeFetchId(req, res) {
+    console.log('((())))))llllllll')
+    console.log(req.query)
     const variable = req.query;
     const employeeFetchIdResult = await employeeFetchId.execute(variable)
+    let resultResponse = employeeFetchIdResult._result;
     if (employeeFetchIdResult.successful) {
-      Responder.success(res, { variable })
+      Responder.success(res, { resultResponse })
     } else {
       Responder.operationFailed(res, employeeFetchIdResult.error)
     }

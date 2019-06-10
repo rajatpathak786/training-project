@@ -14,7 +14,8 @@ export default class moduleUpdate extends ServiceBase {
 
   async run() {
     try {
-      moduletable.update({ taskId: this._args.taskId }, {
+      console.log(this._args)
+      moduletable.update({ taskId: this._args.taskId, moduleName: this._args.moduleName }, {
         where: {
           id: this._args.id
         }

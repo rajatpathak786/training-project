@@ -1,24 +1,30 @@
 import ServiceBase from '../base'
+import module from '../../controllers/module';
 const moduletable = require('../../../models').moduleTable;
 
-const constraints = {
-  variable: {
-    presence: { allowEmpty: false }
-  }
-}
-
 export default class moduleFetchId extends ServiceBase {
-  get constraints () {
-    return constraints
-  }
+  // get constraints () {
+  //   return constraints
+  // }
 
   async run () {
     try {
-      moduletable.findAll({
-        attributes: ['id'],
-        where: {moduleName: this._args.name}
-      })
-      return this._args
+      let moduleTaskDetails = []
+      let retId = async() => {
+        return await moduletable.findAll({
+          attributes: ['moduleName', 'taskId'],
+          where: {id: this._args.id}
+        })
+        .then((moduleDetails) => {
+          let name = moduleDetails[0].moduleName;
+          let taskId = moduleDetails[0].taskId;
+          moduleTaskDetails.push({'id': this._args.id, 'name': name, 'taskId': taskId})
+          return moduleTaskDetails
+        })
+      }
+      let returnVal = await retId();
+      return returnVal
+
     } catch (error) {   
       return this.variable
     }

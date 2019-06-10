@@ -1,29 +1,24 @@
 import ServiceBase from '../base'
 const emptable = require('../../../models').empTable;
-const constraints = {
-  variable: {
-    presence: { allowEmpty: false }
-  }
-}
 
 export default class employeeFetchId extends ServiceBase {
-  get constraints () {
-    return constraints
-  }
 
   async run () {
     try {
-      let returnval = await retId();
-      async function retId() {
-        await emptable.findAll({
-          attributes: ['id'],
-          where: {empName: req.query.name}
+      let empDetails = []
+      let retId = async() => {
+        return await emptable.findAll({
+          attributes: ['empName', 'empEmail'],
+          where: {id: this._args.id}
         })
-        .then(async(emp) => {
-          returnval = emp[0].id;
-          return returnval
+        .then((emp) => {
+          let name = emp[0].empName;
+          let email = emp[0].empEmail;
+          empDetails.push({'id': this._args.id, 'name': name, 'email': email})
+          return empDetails
         })
       }
+      let returnval = await retId();
       return returnval
     }
 

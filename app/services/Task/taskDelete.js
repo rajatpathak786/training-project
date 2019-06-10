@@ -14,7 +14,7 @@ export default class taskDelete extends ServiceBase {
   async run() {
     try {
       tasktable.destroy({
-        where: {taskName: this._args.taskname}
+        where: {id: this._args.id}
       })
       
       return this._args

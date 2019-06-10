@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const employee = require('./router/employee');
@@ -9,6 +10,7 @@ const sendemail = require('./router/sendemail');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.text());
 router.use(bodyParser.json());
+router.use(cors());
 router.use(sendemail);
 router.use(employee);
 router.use(modulee);

@@ -8,5 +8,6 @@ router.get('/taskFetch', task.taskFetch);
 router.get('/taskFetchId', task.taskFetchId);
 router.get('/taskDelete', task.taskDelete);
 router.post('/taskUpdate', task.taskUpdate);
+router.get('/taskDetails', task.taskDetails);
 
 module.exports = router;

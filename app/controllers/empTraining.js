@@ -4,6 +4,7 @@ import updateDrift from '../services/EmpTraining/updateDrift'
 import empTrainingGet from '../services/EmpTraining/empTrainingGet'
 import updateDriftParams from '../services/EmpTraining/updateDriftParams'
 import trelloUpdateBoard from '../services/Trello/trelloUpdateBoard'
+import empTrainingGetDetail from '../services/EmpTraining/empTrainingGetDetail'
 
 export default class empTraining {
 
@@ -30,6 +31,7 @@ export default class empTraining {
     const variable = req.body;
     variable.endDate = new Date();
     variable.Date = new Date();
+    console.log(variable);
     const updateDriftResult = await updateDrift.execute(variable)
     if (updateDriftResult.successful) {
       Responder.success(res, { variable })
@@ -44,6 +46,16 @@ export default class empTraining {
       Responder.success(res, { variable })
     } else {
       Responder.operationFailed(res, empTrainingGetResult.error)
+    }
+  }
+  static async empTrainingDetails(req, res) {
+    const variable = req.body;
+    const empTrainingGetDetailResult = await empTrainingGetDetail.execute(variable)
+    let responseResult = empTrainingGetDetailResult._result
+    if (empTrainingGetDetailResult.successful) {
+      Responder.success(res, { responseResult })
+    } else {
+      Responder.operationFailed(res, empTrainingGetDetailResult.error)
     }
   }
   static async updateDriftParams(req, res) {

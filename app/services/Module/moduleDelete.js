@@ -15,7 +15,7 @@ export default class moduleDelete extends ServiceBase {
   async run () {
     try {
         moduletable.destroy({
-            where: {moduleName: this._args.name}
+            where: {id: this._args.id}
           })
       return this._args
     } catch (error) {     
